@@ -13,7 +13,7 @@ const datenschutzSchema = defineType({
       validation: (Rule) => Rule.required().min(1).max(100),
     }),
     defineField({
-      name: 'information',
+      name: 'information', 
       title: 'Information',
       type: 'array',
       of: [

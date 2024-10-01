@@ -4,11 +4,12 @@ import {internationalizedArray} from 'sanity-plugin-internationalized-array'
 import schemas from './schemaTypes';
 import {structureTool} from 'sanity/structure'
 import {CalendarIcon, CogIcon, DocumentTextIcon, UsersIcon, BookIcon, DropIcon, TagsIcon} from '@sanity/icons';
+import { QIcon } from './components/QIcon';
 
 export default defineConfig({
   name: 'default',
   title: 'Qujochoe Admin',
-
+  icon: QIcon,
   projectId: 'h8ta33uq',
   dataset: 'production',
 
