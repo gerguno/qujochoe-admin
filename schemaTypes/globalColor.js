@@ -15,20 +15,27 @@ const globalColorSchema = defineType({
     defineField({
       name: 'backgroundColor',
       title: 'Background Color',
-      description: 'Background Color in HEX format',
+      description: 'HEX format.',
       type: 'string',
     }),
     defineField({
       name: 'uiColor',
       title: 'UI Color',
-      description: 'UI Color in HEX format (usually a foreground color in difference mode above a background color)',
+      description: 'HEX format. The color to be used for non-interactive elements.',
       type: 'string',
     }),
     defineField({
       name: 'foregroundColor',
       title: 'Foreground Color',
-      description: 'Foreground Color in HEX format',
+      description: 'HEX format. By default is in difference effect (!)',
       type: 'string',
+    }),
+    defineField({
+      name: 'differenceEffect',
+      title: 'Difference Effect',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Foreground Color will be in the difference mode above the Background Color',
     }),
   ],
   preview: {
@@ -37,20 +44,44 @@ const globalColorSchema = defineType({
       backgroundColor: 'backgroundColor',
       uiColor: 'uiColor',
       foregroundColor: 'foregroundColor',
+      differenceEffect: 'differenceEffect',
     },
-    prepare({ backgroundColor, uiColor, foregroundColor, title }) {
+    prepare({ backgroundColor, uiColor, foregroundColor, differenceEffect, title }) {
       const media = React.createElement('div', {
         style: {
-          display: 'flex',
           height: '100%',
           width: '100%',
-          borderRadius: '3px',
+          borderRadius: '4px',
           overflow: 'hidden',
         },
       }, 
-      React.createElement('div', { style: { flex: 1, backgroundColor, height: '100%' } }),
-      React.createElement('div', { style: { flex: 1, backgroundColor: uiColor, height: '100%' } }),
-      React.createElement('div', { style: { flex: 1, backgroundColor: foregroundColor, height: '100%' } })
+        React.createElement('div', { 
+          style: { position: 'absolute', top: 0, left: 0, backgroundColor: backgroundColor, height: '100%', width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }
+        },
+          React.createElement('span', {
+            style: {  color: 'white', color: differenceEffect ? 'white' : 'black', mixBlendMode: differenceEffect ? 'difference' : 'unset', fontFamily: 'monospace', fontSize: '8px' },
+          }, 'BG'),
+        ),
+        React.createElement(
+          'div', 
+          { style: { position: 'absolute', top: 0, right: 0, backgroundColor: backgroundColor, height: '50%', width: '50%' } },
+          React.createElement(
+            'div', 
+            { style: { position: 'absolute', zIndex: 2, top: 0, right: 0, backgroundColor: foregroundColor, height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center',  mixBlendMode: differenceEffect ? 'difference' : 'unset'}},
+            React.createElement(
+              'span', 
+              { style: { color: 'black', fontFamily: 'monospace', fontSize: '8px', color: differenceEffect ? 'white' : 'black', mixBlendMode: differenceEffect ? 'difference' : 'unset' } },
+              'FG'
+            )
+          )
+        ),        
+        React.createElement('div', { 
+          style: { position: 'absolute', zIndex: 2, bottom: 0, right: 0, backgroundColor: uiColor, height: '50%', width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' } 
+        },
+          React.createElement('span', {
+            style: {  color: 'black', fontFamily: 'monospace', fontSize: '8px' },
+          }, 'UI'),
+        ),
       );
 
       return {
