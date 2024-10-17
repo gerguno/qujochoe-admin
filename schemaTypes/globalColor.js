@@ -27,15 +27,10 @@ const globalColorSchema = defineType({
     defineField({
       name: 'foregroundColor',
       title: 'Foreground Color',
-      description: 'HEX format. By default is in difference effect (!)',
+      initialValue: '#FFFFFF',
+      readOnly: true,
+      description: 'By default is in difference effect (!)',
       type: 'string',
-    }),
-    defineField({
-      name: 'differenceEffect',
-      title: 'Difference Effect',
-      type: 'boolean',
-      initialValue: true,
-      description: 'Foreground Color will be in the difference mode above the Background Color',
     }),
   ],
   preview: {
@@ -44,9 +39,8 @@ const globalColorSchema = defineType({
       backgroundColor: 'backgroundColor',
       uiColor: 'uiColor',
       foregroundColor: 'foregroundColor',
-      differenceEffect: 'differenceEffect',
     },
-    prepare({ backgroundColor, uiColor, foregroundColor, differenceEffect, title }) {
+    prepare({ backgroundColor, uiColor, foregroundColor, title }) {
       const media = React.createElement('div', {
         style: {
           height: '100%',
@@ -59,7 +53,7 @@ const globalColorSchema = defineType({
           style: { position: 'absolute', top: 0, left: 0, backgroundColor: backgroundColor, height: '100%', width: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }
         },
           React.createElement('span', {
-            style: {  color: 'white', color: differenceEffect ? 'white' : 'black', mixBlendMode: differenceEffect ? 'difference' : 'unset', fontFamily: 'monospace', fontSize: '8px' },
+            style: {  color: 'white', color: 'white', mixBlendMode: 'difference', fontFamily: 'monospace', fontSize: '8px' },
           }, 'BG'),
         ),
         React.createElement(
@@ -67,10 +61,10 @@ const globalColorSchema = defineType({
           { style: { position: 'absolute', top: 0, right: 0, backgroundColor: backgroundColor, height: '50%', width: '50%' } },
           React.createElement(
             'div', 
-            { style: { position: 'absolute', zIndex: 2, top: 0, right: 0, backgroundColor: foregroundColor, height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center',  mixBlendMode: differenceEffect ? 'difference' : 'unset'}},
+            { style: { position: 'absolute', zIndex: 2, top: 0, right: 0, backgroundColor: foregroundColor, height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center',  mixBlendMode: 'difference'}},
             React.createElement(
               'span', 
-              { style: { color: 'black', fontFamily: 'monospace', fontSize: '8px', color: differenceEffect ? 'white' : 'black', mixBlendMode: differenceEffect ? 'difference' : 'unset' } },
+              { style: { color: 'black', fontFamily: 'monospace', fontSize: '8px', color: 'white', mixBlendMode: 'difference' } },
               'FG'
             )
           )

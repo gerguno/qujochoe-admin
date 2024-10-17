@@ -45,8 +45,9 @@ const eventsSchema = defineType({
         maxLength: 96,
         slugify: input => input
         .toLowerCase()
-        .replace(/\s+|\.+/g, '-')
-        .slice(0, 96)
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 96),
       },
       validation: (Rule) => Rule.required(),
       group: ['single'],
