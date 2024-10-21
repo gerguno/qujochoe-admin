@@ -143,8 +143,7 @@ const eventsSchema = defineType({
     defineField({
       name: 'event_series',
       title: "Event Series",
-      description:
-        'Please specify if current event is consisting of multiple series',
+      description: 'Please specify if current event is consisting of multiple series',
       type: 'boolean',
       initialValue: false,
       group: ['aggregator', 'single'],
