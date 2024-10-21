@@ -44,7 +44,7 @@ export default defineConfig({
             S.listItem()
               .title('About')
               .icon(DocumentTextIcon)
-              .id('about')
+              .id('about')   
               .child(
                 S.document()
                   .schemaType('about')
