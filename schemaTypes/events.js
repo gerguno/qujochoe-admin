@@ -153,18 +153,7 @@ const eventsSchema = defineType({
       name: 'series_part',
       title: "Event's Series Part",
       description: 'Specify the current series part of the event series',
-      type: 'number',
-      validation: rule =>
-        rule.custom((currentValue, { document }) => {
-          if (document && document.event_series && currentValue === undefined) {
-            return `You must specify a series part if "Event Series" is turned on.`;
-          }
-          return true;
-        }),
-      hidden: ({ document }) => {
-        if (!document) return true;
-        return !document.event_series;
-      },
+      type: 'string',
       group: ['aggregator', 'single'],
     }),
     defineField({
