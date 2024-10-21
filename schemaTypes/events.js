@@ -180,9 +180,11 @@ const eventsSchema = defineType({
       title: 'a',
       mediaImage: 'gallery.0.asset', 
       date: 'date_time', 
+      eventTypeIcon: 'event_type.0.icon',
+      eventTypeTitle: 'event_type.0.title',
     },
     prepare(selection) {
-      const { title, mediaImage, date } = selection;
+      const { title, mediaImage, date, eventTypeTitle, eventTypeIcon } = selection;
       const formattedDate = new Date(date).toLocaleDateString('de-DE', {
         year: 'numeric',
         month: 'short',
@@ -191,7 +193,7 @@ const eventsSchema = defineType({
   
       return {
         title: title[0].value, 
-        subtitle: formattedDate,
+        subtitle: (eventTypeIcon || '') + ' ' + (eventTypeTitle || '') + ', ' + formattedDate,
         media: mediaImage,
       };
     },

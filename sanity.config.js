@@ -23,11 +23,23 @@ export default defineConfig({
               .title('Events')
               .icon(CalendarIcon)
               .child(
-                S.documentList()
-                  .title('Events')
-                  .filter('_type == $type')
-                  .params({ type: 'events' })
-                  .defaultOrdering([{ field: 'date_time', direction: 'desc' }])
+                S.list()
+                  .title('Events by Year')
+                  .items(
+                    Array.from({ length: new Date().getFullYear() - 2000 }, (_, index) => {
+                      const year = 2001 + index;
+                      return S.listItem()
+                        .title(String(year))
+                        .child(
+                          S.documentList()
+                            .title(`Events in ${year}`)
+                            // Match based on string comparison (checking if date_time starts with the year string)
+                            .filter('_type == "events" && date_time match $year')
+                            .params({ year: `${year}` }) // Convert year to string for matching
+                            .defaultOrdering([{ field: 'date_time', direction: 'desc' }])
+                        );
+                    }).reverse() // Reverse to show latest years first
+                  )
               ),
             S.listItem()
               .title('About')

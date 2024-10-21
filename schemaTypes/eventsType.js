@@ -13,6 +13,11 @@ const eventsTypeSchema = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'icon',
+      title: 'Icon of an Event Type',
+      type: 'string',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug of an Event Type',
       type: 'slug',
