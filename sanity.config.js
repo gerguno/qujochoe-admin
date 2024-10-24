@@ -33,9 +33,8 @@ export default defineConfig({
                         .child(
                           S.documentList()
                             .title(`Events in ${year}`)
-                            // Match based on string comparison (checking if date_time starts with the year string)
                             .filter('_type == "events" && date_time match $year')
-                            .params({ year: `${year}` }) // Convert year to string for matching
+                            .params({ year: `${year}` }) 
                             .defaultOrdering([{ field: 'date_time', direction: 'desc' }])
                         );
                     }).reverse() // Reverse to show latest years first

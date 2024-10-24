@@ -113,6 +113,7 @@ const eventsSchema = defineType({
         list: [
           { title: 'Landscape', value: 'landscape' },
           { title: 'Portrait', value: 'portrait' },
+          { title: 'Square', value: 'square' },
         ],
         layout: 'radio',
       },
