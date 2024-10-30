@@ -14,37 +14,36 @@ const globalColorSchema = defineType({
     defineField({
       name: 'backgroundColor',
       title: 'Background Color',
-      description: 'HEX format.',
-      type: 'string',
+      type: 'color',
     }),
     defineField({
       name: 'uiColor',
       title: 'UI Color',
-      description: 'HEX format. The color to be used for non-interactive elements.',
-      type: 'string',
+      description: 'The color to be used for non-interactive elements.',
+      type: 'color',
     }),
     defineField({
       name: 'differenceSubstitutionColor',
       title: 'Difference Substitution Color',
-      description: 'HEX format. The color should be the same as the Foreground Color above Background Color in difference effect',
-      type: 'string',
+      description: 'The color should be the same as the Foreground Color above Background Color in difference effect',
+      type: 'color',
     }),
     defineField({
       name: 'foregroundColor',
       title: 'Foreground Color',
       initialValue: '#FFFFFF',
-      readOnly: true,
-      description: 'By default is in difference effect (!)',
+      // readOnly: true,
+      description: 'By default is #FFFFFF (white) in difference effect (!)',
       type: 'string',
     }),
   ],
   preview: {
     select: {
       title: 'title',
-      backgroundColor: 'backgroundColor',
-      uiColor: 'uiColor',
+      backgroundColor: 'backgroundColor.hex',
+      uiColor: 'uiColor.hex',
       foregroundColor: 'foregroundColor',
-      differenceSubstitutionColor: 'differenceSubstitutionColor',
+      differenceSubstitutionColor: 'differenceSubstitutionColor.hex',
     },
     prepare({ backgroundColor, uiColor, foregroundColor, differenceSubstitutionColor, title }) {
       const media = React.createElement('div', {

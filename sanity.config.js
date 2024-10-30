@@ -1,10 +1,11 @@
-import { defineConfig, defineField } from 'sanity';
-import { visionTool } from '@sanity/vision';
+import {defineConfig, defineField} from 'sanity';
+import {visionTool} from '@sanity/vision';
 import {internationalizedArray} from 'sanity-plugin-internationalized-array'
 import schemas from './schemaTypes';
 import {structureTool} from 'sanity/structure'
 import {CalendarIcon, CogIcon, DocumentTextIcon, UsersIcon, BookIcon, DropIcon, TagsIcon} from '@sanity/icons';
 import { QIcon } from './components/QIcon';
+import {colorInput} from '@sanity/color-input'
 
 export default defineConfig({
   name: 'default',
@@ -86,7 +87,7 @@ export default defineConfig({
               ),
           ])
     }),
-    
+    colorInput(),
     visionTool(),
     internationalizedArray({
       languages: [
