@@ -6,6 +6,7 @@ import {structureTool} from 'sanity/structure'
 import {CalendarIcon, CogIcon, DocumentTextIcon, UsersIcon, BookIcon, DropIcon, TagsIcon} from '@sanity/icons';
 import { QIcon } from './components/QIcon';
 import {colorInput} from '@sanity/color-input'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 export default defineConfig({
   name: 'default',
@@ -16,7 +17,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({
-      structure: S =>
+      structure: (S, context) =>
         S.list()
           .title('Qujochoe Dashboard')
           .items([
@@ -74,9 +75,13 @@ export default defineConfig({
                 S.list()
                   .title('Global Settings')
                   .items([
-                    S.documentTypeListItem('events_type')
-                      .title('Event Types')
-                      .icon(TagsIcon),
+                    orderableDocumentListDeskItem({
+                      type: 'events_type',
+                      title: 'Event Types',
+                      icon: TagsIcon,
+                      S,
+                      context
+                    }),
                     S.documentTypeListItem('person')
                       .title('People')
                       .icon(UsersIcon),

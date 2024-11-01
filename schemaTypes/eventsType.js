@@ -13,6 +13,19 @@ const eventsTypeSchema = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'row',
+      title: 'Row Position',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Top', value: 'top' },
+          { title: 'Bottom', value: 'bottom' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'top',
+    }),
+    defineField({
       name: 'icon',
       title: 'Icon of an Event Type',
       type: 'string',
@@ -32,6 +45,15 @@ const eventsTypeSchema = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
+    {
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'string',
+      hidden: true,
+      options: {
+        isOrderable: true,
+      },
+    },
   ],
 });
 
