@@ -44,12 +44,16 @@ const eventsSchema = defineType({
         source: 'a[0].value',
         maxLength: 96,
         slugify: input => input
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')
-        .slice(0, 96),
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters, including slashes, with hyphens
+          .replace(/^-+|-+$/g, '')     // Remove leading and trailing hyphens
+          .slice(0, 96),
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().custom(slug => {
+        return slug && slug.current.includes('/')
+          ? 'Slashes (/) are not allowed in the slug.'
+          : true;
+      }),
       group: ['single'],
     }),
     defineField({
