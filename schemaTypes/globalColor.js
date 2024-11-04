@@ -19,7 +19,7 @@ const globalColorSchema = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'uiColor',
+      name: 'uiColor',  
       title: 'UI Color',
       description: 'The color to be used for non-interactive elements.',
       type: 'color',
