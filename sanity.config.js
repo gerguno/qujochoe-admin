@@ -1,12 +1,18 @@
-import {defineConfig, defineField} from 'sanity';
+import {defineConfig} from 'sanity';
 import {visionTool} from '@sanity/vision';
-import {internationalizedArray} from 'sanity-plugin-internationalized-array'
+import {internationalizedArray} from 'sanity-plugin-internationalized-array';
 import schemas from './schemaTypes';
-import {structureTool} from 'sanity/structure'
+import {structureTool} from 'sanity/structure';
 import {CalendarIcon, CogIcon, DocumentTextIcon, UsersIcon, BookIcon, DropIcon, TagsIcon} from '@sanity/icons';
-import { QIcon } from './components/QIcon';
-import {colorInput} from '@sanity/color-input'
-import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
+import {QIcon} from './components/QIcon';
+import {colorInput} from '@sanity/color-input';
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list';
+import { fetchYears } from './fetchYears';
+
+let years = [];
+fetchYears().then((data) => {
+  years = data;
+});
 
 export default defineConfig({
   name: 'default',
@@ -27,25 +33,34 @@ export default defineConfig({
               .child(
                 S.list()
                   .title('Events by Year')
-                  .items(
-                    Array.from({ length: new Date().getFullYear() - 2000 }, (_, index) => {
-                      const year = 2001 + index;
-                      return S.listItem()
+                  .items([
+                    // "All Events" folder
+                    // S.listItem()
+                    //   .title('All Events')
+                    //   .child(
+                    //     S.documentList()
+                    //       .title('All Events')
+                    //       .filter('_type == "events"')
+                    //       .defaultOrdering([{ field: 'date_time', direction: 'desc' }])
+                    //   ),
+                    // Dynamic list of events by unique years
+                    ...years?.map(year =>
+                      S.listItem()
                         .title(String(year))
                         .child(
                           S.documentList()
                             .title(`Events in ${year}`)
                             .filter('_type == "events" && date_time match $year')
-                            .params({ year: `${year}` }) 
+                            .params({ year: `${year}` })
                             .defaultOrdering([{ field: 'date_time', direction: 'desc' }])
-                        );
-                    }).reverse() // Reverse to show latest years first
-                  )
+                        )
+                    )
+                  ])
               ),
             S.listItem()
               .title('About')
               .icon(DocumentTextIcon)
-              .id('about')   
+              .id('about')
               .child(
                 S.document()
                   .schemaType('about')
@@ -62,10 +77,10 @@ export default defineConfig({
                   .documentId('datenschutz')
                   .title('Datenschutz')
               ),
-            
+
             // Divider
             S.divider(),
-            
+
             // Global Settings Section
             S.listItem()
               .title('Global Settings')
@@ -109,4 +124,4 @@ export default defineConfig({
   schema: {
     types: schemas,
   },
-})
+});

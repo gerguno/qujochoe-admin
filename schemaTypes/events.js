@@ -19,7 +19,6 @@ const eventsSchema = defineType({
       name: 'q',
       title: 'Q',
       type: 'internationalizedArrayString',
-      validation: (Rule) => Rule.required(),
       group: ['aggregator', 'single'],
     }),
     defineField({
@@ -61,7 +60,6 @@ const eventsSchema = defineType({
       title: "Event's Type",
       type: 'array',
       of: [{ type: 'reference', to: { type: 'events_type' } }],
-      validation: (Rule) => Rule.required(),
       group: ['single'],
     }),
     defineField({
@@ -147,6 +145,7 @@ const eventsSchema = defineType({
       type: 'reference',
       to: { type: 'global_color' },
       group: ['aggregator', 'single'],
+      validation: Rule => Rule.required()
     }),
     defineField({
       name: 'audios',
@@ -184,6 +183,7 @@ const eventsSchema = defineType({
       description: 'Specify the current series part of the event series',
       type: 'string',
       group: ['aggregator', 'single'],
+      hidden: ({ document }) => !document.event_series,  // Only show if event_series is true
     }),
     defineField({
       name: 'text_blocks_in_bottom',
