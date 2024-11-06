@@ -122,7 +122,24 @@ const eventsSchema = defineType({
         layout: 'radio',
       },
       initialValue: 'landscape',
-      group: ['aggregator', 'single'],
+      group: ['aggregator'],
+    }),
+    defineField({
+      name: 'gallery_single_images_quantity',
+      title: 'Gallery Single Images Quantity For Exp Mode',
+      description: '3 by default',
+      type: 'number',
+      options: {
+        list: [
+          { title: '3', value: 3 },
+          { title: '6', value: 6 },
+          { title: '8', value: 8 },
+          { title: '12', value: 12 },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 3,
+      group: ['single'],
     }),
     defineField({
       name: 'colors',
@@ -142,7 +159,15 @@ const eventsSchema = defineType({
       name: 'videos',
       title: "Event's Videos",
       type: 'array',
-      of: [{ type: 'url' }],
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'url', type: 'url', title: 'Video URL' },
+            { name: 'caption', type: 'string', title: 'Video Caption' }
+          ]
+        }
+      ],
       group: ['single'],
     }),
     defineField({
