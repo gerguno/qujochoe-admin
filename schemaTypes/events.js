@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity';
+import CaptionsWithImagesComponent from '../components/CaptionsWithImagesComponent';
 
 const eventsSchema = defineType({
   name: 'events',
@@ -108,6 +109,21 @@ const eventsSchema = defineType({
       group: ['aggregator', 'single'],
     }),
     defineField({
+      name: 'captions',
+      title: 'Captions',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+          title: 'Caption',
+        },
+      ],
+      components: {
+        input: CaptionsWithImagesComponent,
+      },
+      group: ['single'],
+    }),
+    defineField({
       name: 'gallery_proportion',
       title: 'Gallery Proportion',
       type: 'string',
@@ -185,13 +201,20 @@ const eventsSchema = defineType({
       group: ['aggregator', 'single'],
       hidden: ({ document }) => !document.event_series,  // Only show if event_series is true
     }),
+    // defineField({
+    //   name: 'text_blocks_in_bottom',
+    //   title: 'Text Blocks in Bottom',
+    //   group: ['single'],
+    //   type: 'array',
+    //   of: [{ type: 'text_block' }],
+    // }),
     defineField({
-      name: 'text_blocks_in_bottom',
-      title: 'Text Blocks in Bottom',
-      group: ['single'],
+      name: 'participants',
+      title: 'Participants',
       type: 'array',
-      of: [{ type: 'text_block' }],
-    }),
+      of: [{ type: 'reference', to: { type: 'person' } }],
+      group: ['single'],
+    }),    
   ],
   preview: {
     select: {
