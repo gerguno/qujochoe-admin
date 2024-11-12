@@ -10,7 +10,7 @@ const eventsTypeSchema = defineType({
     defineField({
       name: 'title',
       title: 'Title of an Event Type',
-      type: 'string',
+      type: 'internationalizedArrayString',
     }),
     defineField({
       name: 'row',
@@ -55,6 +55,18 @@ const eventsTypeSchema = defineType({
       },
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare(selection) {
+      const { title } = selection;
+    
+      return {
+        title: title[1].value, 
+      };
+    },
+  },
 });
 
 export default eventsTypeSchema;

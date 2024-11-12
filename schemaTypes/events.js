@@ -234,7 +234,7 @@ const eventsSchema = defineType({
   
       return {
         title: title[0].value, 
-        subtitle: (eventTypeIcon || '') + ' ' + (eventTypeTitle || '') + ', ' + formattedDate,
+        subtitle: (eventTypeIcon || '') + ' ' + (eventTypeTitle[1].value || '') + ', ' + formattedDate,
         media: mediaImage,
       };
     },
