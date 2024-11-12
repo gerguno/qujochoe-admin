@@ -15,6 +15,13 @@ const eventsSchema = defineType({
       title: 'Single page fields',
     },
   ],
+  fieldsets: [
+    {
+      name: 'dateRange',
+      title: 'Date Range',
+      options: { columns: 1 },
+    },
+  ],
   fields: [
     defineField({
       name: 'q',
@@ -65,10 +72,19 @@ const eventsSchema = defineType({
     }),
     defineField({
       name: 'date_time',
-      title: 'Date and Time',
+      title: 'Start Date and Time',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
       group: ['aggregator'],
+      fieldset: 'dateRange', // Add to fieldset
+    }),
+    defineField({
+      name: 'date_time_end',
+      title: 'End Date and Time',
+      type: 'datetime',
+      validation: (Rule) => Rule.required(),
+      group: ['aggregator'],
+      fieldset: 'dateRange', // Add to fieldset
     }),
     defineField({
       name: 'small_description',
