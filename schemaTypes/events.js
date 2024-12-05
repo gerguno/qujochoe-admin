@@ -24,6 +24,12 @@ const eventsSchema = defineType({
   ],
   fields: [
     defineField({
+      name: 'main_title',
+      title: 'Title',
+      type: 'internationalizedArrayString',
+      group: ['aggregator', 'single'],
+    }),
+    defineField({
       name: 'q',
       title: 'Q',
       type: 'internationalizedArrayString',
@@ -88,7 +94,7 @@ const eventsSchema = defineType({
     }),
     defineField({
       name: 'small_description',
-      title: 'Small Description',
+      title: 'Additional Info',
       type: 'internationalizedArrayText',
       group: ['aggregator'],
     }),
@@ -234,14 +240,15 @@ const eventsSchema = defineType({
   ],
   preview: {
     select: {
-      title: 'a',
+      main_title: 'main_title',
+      a: 'a',
       mediaImage: 'gallery.0.asset', 
       date: 'date_time', 
       eventTypeIcon: 'event_type.0.icon',
       eventTypeTitle: 'event_type.0.title',
     },
     prepare(selection) {
-      const { title, mediaImage, date, eventTypeTitle, eventTypeIcon } = selection;
+      const { main_title, a, mediaImage, date, eventTypeTitle, eventTypeIcon } = selection;
       const formattedDate = new Date(date).toLocaleDateString('de-DE', {
         year: 'numeric',
         month: 'short',
@@ -249,7 +256,7 @@ const eventsSchema = defineType({
       });
   
       return {
-        title: title[0].value, 
+        title: main_title[0].value || a[0].value, 
         subtitle: (eventTypeIcon || '') + ' ' + (eventTypeTitle[1].value || '') + ', ' + formattedDate,
         media: mediaImage,
       };

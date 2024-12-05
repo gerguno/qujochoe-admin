@@ -18,6 +18,11 @@ const personSchema = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'Link',
+      title: 'Link',
+      type: 'url',
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
