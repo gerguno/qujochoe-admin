@@ -99,9 +99,17 @@ const eventsSchema = defineType({
       group: ['aggregator'],
     }),
     defineField({
-      name: 'large_description',
-      title: 'Large Description',
-      type: 'internationalizedArrayText',
+      name: 'full_description_de',
+      title: 'Full Description (DE)',
+      type: 'array',
+      of: [{ type: 'block' }],
+      group: ['single'],
+    }),
+    defineField({
+      name: 'full_description_eng',
+      title: 'Full Description (ENG)',
+      type: 'array',
+      of: [{ type: 'block' }],
       group: ['single'],
     }),
     defineField({
