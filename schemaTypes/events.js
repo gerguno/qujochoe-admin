@@ -186,6 +186,7 @@ const eventsSchema = defineType({
           { title: '6', value: 6 },
           { title: '8', value: 8 },
           { title: '12', value: 12 },
+          { title: '24', value: 24 },
         ],
         layout: 'radio',
       },
