@@ -18,7 +18,7 @@ const personSchema = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'Link',
+      name: 'link',
       title: 'Link',
       type: 'url',
     }),
@@ -47,6 +47,12 @@ const personSchema = defineType({
       type: 'array',
       of: [{ type: 'block' }],
     }),
+    {
+      name: 'two_cols',
+      title: '2 Columns',
+      type: 'boolean',
+      initialValue: false,
+    }
   ],
   preview: {
     select: {

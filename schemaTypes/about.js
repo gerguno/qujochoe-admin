@@ -53,18 +53,18 @@ const aboutSchema = defineType({
       title: 'Additional Info',
       type: 'internationalizedArrayText',
     }),
-    defineField({
-      name: 'aktuelle_nutzer_innen',
-      title: 'Aktuelle Nutzer_innen',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'person' }] }],
-    }),
-    defineField({
-      name: 'ehemalige_nutzer_innen',
-      title: 'Ehemalige Nutzer_innen',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'person' }] }],
-    }),
+    // defineField({
+    //   name: 'aktuelle_nutzer_innen',
+    //   title: 'Aktuelle Nutzer_innen',
+    //   type: 'array',
+    //   of: [{ type: 'reference', to: [{ type: 'person' }] }],
+    // }),
+    // defineField({
+    //   name: 'ehemalige_nutzer_innen',
+    //   title: 'Ehemalige Nutzer_innen',
+    //   type: 'array',
+    //   of: [{ type: 'reference', to: [{ type: 'person' }] }],
+    // }),
     defineField({
       name: 'kunstlerinnen',
       title: 'Künstlerinnen',
