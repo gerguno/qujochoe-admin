@@ -92,6 +92,13 @@ const eventsSchema = defineType({
       group: ['aggregator'],
       fieldset: 'dateRange', // Add to fieldset
     }),
+    {
+      name: 'show_date_time_end',
+      title: 'Show End Date on the Event Page',
+      type: 'boolean',
+      initialValue: false,
+      group: ['single'],
+    },
     defineField({
       name: 'small_description',
       title: 'Additional Info',
