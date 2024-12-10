@@ -12,31 +12,43 @@ const datenschutzSchema = defineType({
       type: 'string',
       validation: (Rule) => Rule.required().min(1).max(100),
     }),
-    defineField({
-      name: 'information', 
-      title: 'Information',
+    {
+      name: 'text_de',
+      title: 'Text (DE)',
       type: 'array',
-      of: [
-        defineField({
-          name: 'information_block',
-          title: 'Information Block',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'text',
-              title: 'Text',
-              type: 'internationalizedArrayText',
-              validation: (Rule) => Rule.required(),
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'text.0.value',
-            },
-          },
-        }),
-      ],
-    }),
+      of: [{ type: 'block' }],
+    },
+    {
+      name: 'text_en',
+      title: 'Text (ENG)',
+      type: 'array',
+      of: [{ type: 'block' }],
+    },
+    // defineField({
+    //   name: 'information', 
+    //   title: 'Information',
+    //   type: 'array',
+    //   of: [
+    //     defineField({
+    //       name: 'information_block',
+    //       title: 'Information Block',
+    //       type: 'object',
+    //       fields: [
+    //         defineField({
+    //           name: 'text',
+    //           title: 'Text',
+    //           type: 'internationalizedArrayText',
+    //           validation: (Rule) => Rule.required(),
+    //         }),
+    //       ],
+    //       preview: {
+    //         select: {
+    //           title: 'text.0.value',
+    //         },
+    //       },
+    //     }),
+    //   ],
+    // }),
   ],
   preview: {
     select: {
