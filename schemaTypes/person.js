@@ -12,6 +12,32 @@ const personSchema = defineType({
       title: 'Full Name',
       type: 'string',
     }),
+    {
+      name: 'peopleGroup',
+      title: 'People Group',
+      description: 'Select the group this person belongs to',
+      type: 'object',
+      fields: [
+        {
+          name: 'qujocho_heute',
+          title: 'Qujocho Heute',
+          type: 'boolean',
+          initialValue: false,
+        },
+        {
+          name: 'qujocho_ehemals',
+          title: 'Qujocho Ehemals',
+          type: 'boolean',
+          initialValue: false,
+        },
+        {
+          name: 'kunstlerinnen',
+          title: 'Künstler*innen',
+          type: 'boolean',
+          initialValue: false,
+        },
+      ]
+    },
     defineField({
       name: 'info',
       title: 'Information',
@@ -52,7 +78,7 @@ const personSchema = defineType({
       title: '2 Columns',
       type: 'boolean',
       initialValue: false,
-    }
+    },
   ],
   preview: {
     select: {
