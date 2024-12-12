@@ -47,24 +47,6 @@ const aboutSchema = defineType({
       title: 'Additional Info',
       type: 'internationalizedArrayText',
     }),
-    // defineField({
-    //   name: 'qujochoe_heute',
-    //   title: 'Qujochoe Heute',
-    //   type: 'array',
-    //   of: [{ type: 'reference', to: [{ type: 'person' }] }],
-    // }),
-    // defineField({
-    //   name: 'qujocho_ehemals',
-    //   title: 'QujOchÖ Ehemals',
-    //   type: 'array',
-    //   of: [{ type: 'reference', to: [{ type: 'person' }] }],
-    // }),
-    // defineField({
-    //   name: 'kunstlerinnen',
-    //   title: 'Künstlerinnen',
-    //   type: 'array',
-    //   of: [{ type: 'reference', to: [{ type: 'person' }] }],
-    // }),
     defineField({
       name: 'logotypes',
       title: 'Logotypes',
