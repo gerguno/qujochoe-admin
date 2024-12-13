@@ -1,4 +1,5 @@
 import { defineType, defineField } from 'sanity';
+import { preProcessFile } from 'typescript';
 
 const aboutSchema = defineType({
   name: 'about',
@@ -47,12 +48,49 @@ const aboutSchema = defineType({
       title: 'Additional Info',
       type: 'internationalizedArrayText',
     }),
+    // defineField({
+    //   name: 'logotypes',
+    //   title: 'Logotypes',
+    //   type: 'array',
+    //   of: [{ type: 'image' }],
+    // }),
     defineField({
       name: 'logotypes',
       title: 'Logotypes',
       type: 'array',
-      of: [{ type: 'image' }],
-    }),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            },
+            {
+              name: 'link',
+              title: 'Link',
+              type: 'url', 
+            },
+          ],
+          preview: {
+            select: {
+              title: 'link',
+              image: 'image',
+            },
+            prepare({ title, image }) {
+              return {
+                title: title ? `${title}` : 'No link',
+                media: image,
+              };
+            }
+          },
+        },
+      ],
+    }),    
     defineField({
       name: 'facebook',
       title: 'Facebook Link',
