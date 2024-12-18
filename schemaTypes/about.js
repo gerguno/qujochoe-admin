@@ -44,16 +44,15 @@ const aboutSchema = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'info_left',
+      title: 'Info on Left',
+      type: 'internationalizedArrayText',
+    }),
+    defineField({
       name: 'additional_info',
       title: 'Additional Info',
       type: 'internationalizedArrayText',
     }),
-    // defineField({
-    //   name: 'logotypes',
-    //   title: 'Logotypes',
-    //   type: 'array',
-    //   of: [{ type: 'image' }],
-    // }),
     defineField({
       name: 'logotypes',
       title: 'Logotypes',
