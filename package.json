@@ -10,7 +10,7 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
-    "deploy-studio": "sanity build && sanity start"
+    "deploy-studio": "sanity build && npx serve -s dist -l 3003"
   },
   "keywords": [
     "sanity"
